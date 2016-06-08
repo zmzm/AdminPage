@@ -1,0 +1,4 @@
+[{ "id":"1", "userName":"testUser1", "firstName":"Test1", "lastName":"Testov1", "email":"test@test.test" },
+ { "id":"2", "userName":"testUser2", "firstName":"Test2", "lastName":"Testov2", "email":"test@test.test" },
+ { "id":"3", "userName":"testUser3", "firstName":"Test3", "lastName":"Testov3", "email":"test@test.test" },
+ { "id":"4", "userName":"testUser4", "firstName":"Test4", "lastName":"Testov4", "email":"test@test.test" }]

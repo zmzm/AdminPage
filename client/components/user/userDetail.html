@@ -1,0 +1,22 @@
+<div class="container col-lg-5 col-lg-offset-1 user-detail" md-whiteframe="20">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h3>User</h3>
+            <span flex="" class="flex"></span>
+        </div>
+    </md-toolbar>
+    <md-content class="md-no-momentum">
+        <md-input-container md-no-float class="md-block">
+            <input type="text" placeholder="Username">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <input ng-model="$ctrl.user.firstName" type="text" placeholder="First name">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <input ng-model="$ctrl.user.lastName" type="text" placeholder="Last name">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+        </md-input-container>
+    </md-content>
+</div>

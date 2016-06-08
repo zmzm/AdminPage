@@ -6,8 +6,9 @@
     "url": "https://github.com/zmzm/AdminPage.git"
   },
   "dependencies": {
-    "angular": "1.5.5",
+    "angular": "1.5.6",
     "angular-mocks": "1.5.5",
+    "angular-material": "1.1.0-rc2",
     "angular-bootstrap": "*",
     "bootstrap": "3.3.6",
     "angular-toastr": "1.7.0"
