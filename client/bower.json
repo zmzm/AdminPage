@@ -9,6 +9,7 @@
     "angular": "1.5.6",
     "angular-mocks": "1.5.5",
     "angular-material": "1.1.0-rc2",
+    "angular-ui-router": "0.2.18",
     "angular-bootstrap": "*",
     "bootstrap": "3.3.6",
     "angular-toastr": "1.7.0"

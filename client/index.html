@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,9 +8,8 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet">
-    <base href="/AdminPage/client/index.html"/>
 </head>
-<body ng-app="app">
+<body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -20,14 +19,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">ADMIN PAGE</a>
+            <a class="navbar-brand" href="#/">ADMIN PAGE</a>
         </div>
-        <app></app>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a href="#" ui-sref="users">USERS</a></li>
+                <li><a href="#" ui-sref="groups">GROUPS</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 <div id="headerwrap">
     <div class="container">
-        <ng-outlet></ng-outlet>
+        <div ui-view></div>
     </div>
 </div>
 <div id="footerwrap">
@@ -38,16 +42,15 @@
     </div>
 </div>
 <script src="bower_components/angular/angular.min.js"></script>
-<script src="node_modules/@angular/router/angular1/angular_1_router.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-material/angular-material.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<script src="components/user/userList.component.js"></script>
-<script src="components/user/userDetail.component.js"></script>
-<script src="components/group/group.service.js"></script>
-<script src="components/group/group.js"></script>
+<script src="components/userList/userList.component.js"></script>
+<script src="components/userDetail/userDetail.component.js"></script>
+<script src="components/groupList/groupList.component.js"></script>
 </body>
 </html>
