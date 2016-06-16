@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/">ADMIN PAGE</a>
+            <a class="navbar-brand" href="#" ui-sref="main">ADMIN PAGE</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
@@ -31,6 +31,8 @@
 </div>
 <div id="headerwrap">
     <div class="container">
+        <ui-breadcrumbs style="background-color: transparent" displayname-property="data.displayName"
+                        template-url="bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.tpl.html"></ui-breadcrumbs>
         <div ui-view></div>
     </div>
 </div>
@@ -46,11 +48,15 @@
 <script src="bower_components/angular-material/angular-material.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
 <script src="components/userList/userList.component.js"></script>
 <script src="components/userDetail/userDetail.component.js"></script>
 <script src="components/groupList/groupList.component.js"></script>
+<script src="components/groupDetail/groupDetail.component.js"></script>
+<script src="components/addGroup/addGroup.component.js"></script>
+<script src="components/addUser/addUser.component.js"></script>
 </body>
 </html>

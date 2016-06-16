@@ -1,0 +1,14 @@
+<div class="panel panel-default container col-lg-5 col-lg-offset-1 user-detail" md-whiteframe="20">
+    <div class="panel-heading"><h4>{{$ctrl.groupDetail.title}}</h4></div>
+    <div class="panel-body">
+        <md-content class="md-no-momentum">
+            <md-input-container md-no-float class="md-block">
+                <input type="text" placeholder="Group name" ng-model="$ctrl.groupDetail.groupName">
+            </md-input-container>
+            <md-input-container md-no-float class="md-block">
+                <input ng-model="$ctrl.groupDetail.title" type="text" placeholder="Title">
+            </md-input-container>
+        </md-content>
+        <a href="#" class="btn btn-theme" style="color: white">Save</a>
+    </div>
+</div>

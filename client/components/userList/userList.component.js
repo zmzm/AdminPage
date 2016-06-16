@@ -4,9 +4,10 @@
     var moduleName = 'Components';
 
     class UserListController {
-        constructor(UserListService) {
+        constructor(UserListService, $state) {
             var $ctrl = this;
-            $ctrl.userList = {};
+            $ctrl.state = $state;
+            $ctrl.userList = [];
             UserListService.getUsers()
                 .then(function (response) {
                     $ctrl.userList = response.users;
@@ -22,7 +23,7 @@
         }
 
         getUsers() {
-            console.log("Load from server....");
+            console.log("Loading from server....");
             return this.$http.get('./components/database/users.json')
                 .then(function handleSuccess(response) {
                     return {
@@ -48,7 +49,11 @@
     function config($stateProvider) {
         $stateProvider.state('users', {
             url: '/users',
-            template: '<user-list></user-list>'
+            template: '<user-list></user-list>' +
+            '<div ui-view></div>',
+            data: {
+                displayName: 'Users'
+            }
         });
     }
 })();

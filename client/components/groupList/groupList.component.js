@@ -1,21 +1,43 @@
 (function () {
     'use strict';
+
     var moduleName = 'Components';
 
     class GroupListController {
-        constructor(GroupListService) {
+        constructor(GroupListService, $state) {
             var $ctrl = this;
-            $ctrl.pageName = GroupListService.pageName();
+            $ctrl.state = $state;
+            $ctrl.groupList = [];
+            GroupListService.getGroups()
+                .then(function (result) {
+                    $ctrl.groupList = result.groups;
+                })
         }
     }
+
+    GroupListController.$inject = ['GroupListService', '$state'];
 
     class GroupListService {
-        pageName() {
-            return 'Groups page';
+        constructor($http) {
+            this.$http = $http;
+        }
+
+        getGroups() {
+            console.log("Loading from server....");
+            return this.$http.get('./components/database/groups.json')
+                .then(function handleSuccess(response) {
+                    return {
+                        status: response.status,
+                        message: response.statusText,
+                        groups: response.data
+                    };
+                }, function handleError(response) {
+                    return response;
+                });
         }
     }
 
-    GroupListController.$inject = ['GroupListService'];
+    GroupListService.$inject = ['$http'];
 
     angular.module(moduleName)
         .service('GroupListService', GroupListService)
@@ -28,7 +50,11 @@
     function config($stateProvider) {
         $stateProvider.state('groups', {
             url: '/groups',
-            template: '<group-list></group-list>'
+            template: '<group-list></group-list>' +
+            '<div ui-view></div>',
+            data: {
+                displayName: 'Groups'
+            }
         });
     }
 })();
