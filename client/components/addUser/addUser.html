@@ -1,4 +1,4 @@
-<div class="panel panel-default container col-lg-5 user-detail" md-whiteframe="20">
+<div class="panel panel-default container col-lg-5 col-md-5 col-sm-12 user-detail" md-whiteframe="20">
     <div class="panel-heading"><h4>User form</h4></div>
     <div class="panel-body">
         <md-content class="md-no-momentum">
@@ -15,6 +15,6 @@
                 <input ng-model="$ctrl.user.email" type="email" placeholder="Email (required)" ng-required="true">
             </md-input-container>
         </md-content>
-        <a href="#" class="btn btn-theme" style="color: white">Create</a>
+        <a href="#" class="btn btn-theme" style="color: white" ng-click="$ctrl.create()">Create</a>
     </div>
 </div>

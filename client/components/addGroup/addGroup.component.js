@@ -6,8 +6,12 @@
     class AddGroupController {
         constructor(AddGroupService) {
             var ctrl = this;
-            ctrl.group = {};
-            AddGroupService.createGroup(ctrl.group);
+            ctrl.AddGroupService = AddGroupService;
+        }
+
+        create() {
+            var ctrl = this;
+            ctrl.AddGroupService.createGroup(ctrl.group);
         }
     }
 
@@ -16,23 +20,19 @@
             this.$http = $http;
         }
 
-        validateUser(group) {
-            return false;
-        }
-
         createGroup(group) {
             if (this.validateUser(group)) {
-                console.log("User created successfully" + " " + group);
+                console.log("Group created successfully" + " " + group);
             }
             else {
                 console.log("Error");
             }
-            /*return this.$http.post('./components/database/users.json', user)
-             .then(function handleSuccess(response) {
-             return response;
-             }, function handleError(response) {
-             return response;
-             });*/
+        }
+
+        validateUser(group) {
+            var groupNameRegex = /^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i,
+                groupTitleRegex = /^[a-z]{2,20}$/i;
+            return !!(group.groupName.match(groupNameRegex) && group.title.match(groupTitleRegex));
         }
     }
 
