@@ -5,12 +5,12 @@
 
     class GroupListController {
         constructor(GroupListService, $state) {
-            var $ctrl = this;
-            $ctrl.state = $state;
-            $ctrl.groupList = [];
+            var ctrl = this;
+            ctrl.state = $state;
+            ctrl.groupList = [];
             GroupListService.getGroups()
                 .then(function (result) {
-                    $ctrl.groupList = result.groups;
+                    ctrl.groupList = result.groups;
                 })
         }
     }
@@ -23,13 +23,12 @@
         }
 
         getGroups() {
-            console.log("Loading from server....");
-            return this.$http.get('./components/database/groups.json')
+            return this.$http.get('./groups')
                 .then(function handleSuccess(response) {
                     return {
                         status: response.status,
                         message: response.statusText,
-                        groups: response.data
+                        groups: response.data.groups
                     };
                 }, function handleError(response) {
                     return response;

@@ -7,9 +7,10 @@ var mongoose = require('mongoose');
 var path = require('path');
 var app = express();
 var userRoutes = require('./routes/userRoutes');
-//var config = require('./config.js');
+var groupRoutes = require('./routes/groupRoutes');
+var config = require('./config.js');
 
-//mongoose.connect(config.db.host + config.db.name);
+mongoose.connect(config.db.host + config.db.name);
 
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(logger('dev'));
@@ -22,11 +23,12 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-app.use('/user/', userRoutes);
-
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
+
+app.use('/users/', userRoutes);
+app.use('/groups/', groupRoutes);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

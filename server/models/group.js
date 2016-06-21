@@ -6,4 +6,4 @@ var Group = new Schema({
     title: String
 });
 
-module.exports = mongoose.model('users', Group);
+module.exports = mongoose.model('groups', Group);

@@ -21,15 +21,25 @@
         }
 
         createGroup(group) {
-            if (this.validateUser(group)) {
-                console.log("Group created successfully" + " " + group);
+            if (this.validateGroup(group)) {
+                this.$http.post('/groups/create', group)
+                    .then(function handleSuccess(response) {
+                        console.log(response);
+                        return {
+                            status: response.status,
+                            message: response.statusText,
+                            group: response.data
+                        };
+                    }, function handleError(response) {
+                        return response;
+                    });
             }
             else {
                 console.log("Error");
             }
         }
 
-        validateUser(group) {
+        validateGroup(group) {
             var groupNameRegex = /^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i,
                 groupTitleRegex = /^[a-z]{2,20}$/i;
             return !!(group.groupName.match(groupNameRegex) && group.title.match(groupTitleRegex));
