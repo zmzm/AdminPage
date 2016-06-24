@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var ObjectId = require('mongoose').Types.ObjectId;
 
 var Group = require('../models/group.js');
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     Group.find({}, function (err, gr) {
         if (err) {
             return res.status(500).json({
@@ -36,7 +35,7 @@ router.post('/create', function (req, res, next) {
             var newGroup = Group(group);
             newGroup.save(function (err, group) {
                 if (err) {
-                    return res.status(500).json({
+                    res.status(500).json({
                         err: 'Could not save group.'
                     });
                 }
@@ -50,16 +49,31 @@ router.post('/create', function (req, res, next) {
     });
 });
 
-router.get('/autocomplete', function (req, res) {
+router.get('/:groupName', function (req, res, next) {
+    var groupName = req.params.groupName;
+    Group.findOne({groupName: groupName}, function (err, gr) {
+        if (err) {
+            return next(err);
+        }
+        else if (gr) {
+            res.status(200).json({
+                group: gr,
+                status: 'Group found!'
+            });
+        }
+    });
+});
+
+router.get('/autocomplete/query', function (req, res) {
     var regex = new RegExp(req.query["q"], 'i');
     Group.find({groupName: regex}).limit(5).exec(function (err, gr) {
         if (err) {
-            return res.status(500).json({
+            res.status(500).json({
                 err: 'Oooops something wrong.'
             });
         }
         else {
-            return res.status(200).json({
+            res.status(200).json({
                 groups: gr,
                 status: 'Group list!'
             });

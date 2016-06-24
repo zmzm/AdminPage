@@ -16,7 +16,6 @@
     angular
         .module('app', [
             'ngMaterial',
-            'angucomplete-alt',
             'ui.bootstrap',
             'Components',
             'angularUtils.directives.uiBreadcrumbs',

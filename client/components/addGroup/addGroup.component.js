@@ -17,12 +17,14 @@
 
     class AddGroupService {
         constructor($http) {
-            this.$http = $http;
+            var service = this;
+            service.$http = $http;
         }
 
         createGroup(group) {
-            if (this.validateGroup(group)) {
-                this.$http.post('/groups/create', group)
+            var service = this;
+            if (service.validateGroup(group)) {
+                service.$http.post('/groups/create', group)
                     .then(function handleSuccess(response) {
                         console.log(response);
                         return {

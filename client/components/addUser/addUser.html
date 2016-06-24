@@ -2,29 +2,10 @@
     <div class="panel-heading"><h4>User form</h4></div>
     <div class="panel-body">
         <md-content class="md-no-momentum">
-            <!--            <div angucomplete-alt
-                             id="ex5"
-                             placeholder="Group name"
-                             pause="100"
-                             selected-object="selectedGroup"
-                             remote-url="http://localhost:3000/groups/autocomplete?q="
-                             remote-url-request-formatter="remoteUrlRequestFn"
-                             remote-url-data-field="groups"
-                             title-field="groupName"
-                             minlength="2"
-                             ng-model="$ctrl.selectedGroup"
-                             input-class="form-control form-control-small"
-                             match-class="highlight">
-                        </div>-->
-            <pre>Model: {{asyncSelected | json}}</pre>
-            <input type="text" ng-model="$ctrl.asyncSelected" placeholder="Locations loaded via $http"
-                   uib-typeahead="group as group.groupName for group in $ctrl.findGroup($viewValue)" typeahead-loading="loadingLocations"
+            <input type="text" ng-model="$ctrl.asyncSelected" placeholder="Group name..."
+                   uib-typeahead="group as group.groupName for group in $ctrl.findGroup($viewValue)"
+                   typeahead-loading="loadingGroups"
                    typeahead-no-results="noResults" class="form-control">
-<!--            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-
-            <div ng-show="noResults">
-                <i class="glyphicon glyphicon-remove"></i> No Results Found
-            </div>-->
             <md-input-container md-no-float class="md-block">
                 <input type="text" placeholder="Username" ng-model="$ctrl.user.username">
             </md-input-container>

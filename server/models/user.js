@@ -6,10 +6,10 @@ var User = new Schema({
     firstName: String,
     lastName: String,
     email: String,
-    group: {
+    group: [{
         type: Schema.ObjectId,
         refs: 'groups'
-    }
+    }]
 });
 
 module.exports = mongoose.model('users', User);

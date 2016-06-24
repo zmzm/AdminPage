@@ -19,9 +19,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in $ctrl.userList | filter: searchUser" ui-sref="users.detail({name: user.userName})">
-                <th scope="row">{{user.id}}</th>
-                <td>{{user.userName}}</td>
+            <tr ng-repeat="user in $ctrl.userList | filter: searchUser" ui-sref="users.detail({name: user.username})">
+                <th scope="row">{{$index + 1}}</th>
+                <td>{{user.username}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.email}}</td>

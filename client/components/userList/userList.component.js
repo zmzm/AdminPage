@@ -5,12 +5,12 @@
 
     class UserListController {
         constructor(UserListService, $state) {
-            var $ctrl = this;
-            $ctrl.state = $state;
-            $ctrl.userList = [];
+            var ctrl = this;
+            ctrl.state = $state;
+            ctrl.userList = [];
             UserListService.getUsers()
                 .then(function (response) {
-                    $ctrl.userList = response.users;
+                    ctrl.userList = response.users;
                 });
         }
     }
@@ -19,17 +19,18 @@
 
     class UserListService {
         constructor($http) {
-            this.$http = $http;
+            var service = this;
+            service.$http = $http;
         }
 
         getUsers() {
-            console.log("Loading from server....");
-            return this.$http.get('./components/database/users.json')
+            var service = this;
+            return service.$http.get('/users')
                 .then(function handleSuccess(response) {
                     return {
                         status: response.status,
                         message: response.statusText,
-                        users: response.data
+                        users: response.data.users
                     };
                 }, function handleError(response) {
                     return response;

@@ -5,11 +5,11 @@
 
     class GroupDetailController {
         constructor(GroupDetailService, $stateParams) {
-            var $ctrl = this;
-            $ctrl.groupDetail = [];
+            var ctrl = this;
+            ctrl.groupDetail = [];
             GroupDetailService.findByGroupName($stateParams.groupName)
                 .then(function (result) {
-                    $ctrl.groupDetail = result;
+                    ctrl.groupDetail = result.group;
                 })
         }
     }
@@ -18,20 +18,19 @@
 
     class GroupDetailService {
         constructor($http) {
-            this.$http = $http;
+            var service = this;
+            service.$http = $http;
         }
 
         findByGroupName(groupName) {
-            var result = {};
-            console.log("Loading from server .....");
-            return this.$http.get('./components/database/groups.json')
+            var service = this;
+            return service.$http.get('/groups/' + groupName)
                 .then(function handleSuccess(response) {
-                    $.map(response.data, function (group) {
-                        if (group.groupName == groupName) {
-                            result = group;
-                        }
-                    });
-                    return result;
+                    return {
+                        status: response.status,
+                        message: response.statusText,
+                        group: response.data.group
+                    };
                 }, function handleError(response) {
                     return response;
                 });

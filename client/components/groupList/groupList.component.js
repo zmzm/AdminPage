@@ -11,6 +11,7 @@
             GroupListService.getGroups()
                 .then(function (result) {
                     ctrl.groupList = result.groups;
+                    console.log(ctrl.groupList);
                 })
         }
     }
@@ -19,11 +20,13 @@
 
     class GroupListService {
         constructor($http) {
-            this.$http = $http;
+            var service = this;
+            service.$http = $http;
         }
 
         getGroups() {
-            return this.$http.get('./groups')
+            var service = this;
+            return service.$http.get('/groups')
                 .then(function handleSuccess(response) {
                     return {
                         status: response.status,

@@ -4,31 +4,31 @@
 
     class UserDetailController {
         constructor(UserDetailService, $stateParams) {
-            var $ctrl = this;
-            $ctrl.user = {};
+            var ctrl = this;
+            ctrl.user = {};
             UserDetailService.findByUsername($stateParams.name)
                 .then(function (result) {
-                    $ctrl.user = result;
+                    ctrl.user = result.user[0];
+                    console.log(ctrl.user);
                 });
         }
     }
 
     class UserDetailService {
         constructor($http) {
-            this.$http = $http;
+            var service = this;
+            service.$http = $http;
         }
 
         findByUsername(username) {
-            var result = {};
-            console.log("Loading from server .....");
-            return this.$http.get('./components/database/users.json')
+            var service = this;
+            return service.$http.get('/users/' + username)
                 .then(function handleSuccess(response) {
-                    $.map(response.data, function (user) {
-                        if (user.userName == username) {
-                            result = user;
-                        }
-                    });
-                    return result;
+                    return {
+                        status: response.status,
+                        message: response.statusText,
+                        user: response.data.user
+                    };
                 }, function handleError(response) {
                     return response;
                 });
