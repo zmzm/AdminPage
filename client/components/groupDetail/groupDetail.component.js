@@ -7,10 +7,20 @@
         constructor(GroupDetailService, $stateParams) {
             var ctrl = this;
             ctrl.groupDetail = [];
-            GroupDetailService.findByGroupName($stateParams.groupName)
+            ctrl.GroupDetailService = GroupDetailService;
+            ctrl.GroupDetailService.findByGroupName($stateParams.groupName)
                 .then(function (result) {
                     ctrl.groupDetail = result.group;
-                })
+                    ctrl.groupDetail.users = result.users;
+                });
+        }
+
+        update() {
+            var ctrl = this;
+            ctrl.GroupDetailService.updateGroup(ctrl.groupDetail)
+                .then(function (result) {
+                    console.log(result);
+                });
         }
     }
 
@@ -29,7 +39,23 @@
                     return {
                         status: response.status,
                         message: response.statusText,
-                        group: response.data.group
+                        group: response.data.group,
+                        users: response.data.users
+                    };
+                }, function handleError(response) {
+                    return response;
+                });
+        }
+
+        updateGroup(group) {
+            var service = this;
+            return service.$http.put('/groups/' + group._id, {group: group})
+                .then(function handleSuccess(response) {
+                    return {
+                        status: response.status,
+                        message: response.statusText,
+                        group: response.data.group,
+                        users: response.data.users
                     };
                 }, function handleError(response) {
                     return response;

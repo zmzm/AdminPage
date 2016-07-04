@@ -2,14 +2,21 @@
      md-whiteframe="20">
     <div class="panel-heading"><h4>Group form</h4></div>
     <div class="panel-body">
-        <md-content class="md-no-momentum">
-            <md-input-container md-no-float class="md-block">
-                <input type="text" placeholder="Name" ng-model="$ctrl.group.groupName">
-            </md-input-container>
-            <md-input-container md-no-float class="md-block">
-                <input ng-model="$ctrl.group.title" type="text" placeholder="Title">
-            </md-input-container>
-        </md-content>
-        <a href="#" class="btn btn-theme" style="color: white" ng-click="$ctrl.create()">Create</a>
+        <form name="groupForm" novalidate>
+            <md-content class="md-no-momentum">
+                <md-input-container md-no-float class="md-block">
+                    <input type="text" placeholder="Name" ng-model="$ctrl.group.groupName"
+                           ng-pattern="/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i"
+                           ng-minlength="4" ng-maxlength="20" required/>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="$ctrl.group.title" type="text" placeholder="Title"
+                           ng-pattern="/^[a-z]{2,20}$/i"
+                           ng-minlength="6" ng-maxlength="20" required/>
+                </md-input-container>
+            </md-content>
+            <a href="#" ng-disabled="groupForm.$invalid" class="btn btn-theme" style="color: white"
+               ng-click="$ctrl.create()">Create</a>
+        </form>
     </div>
 </div>

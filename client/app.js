@@ -1,25 +1,25 @@
 (function () {
     'use strict';
 
-    var appRouting = function ($stateProvider, $urlRouterProvider) {
-        $stateProvider
-            .state('main', {
-                url: '/',
-                templateUrl: 'home.html',
-                data: {
-                    displayName: "Home"
-                }
-            });
-        $urlRouterProvider.otherwise('/');
-    };
+    angular.module('Components', []);
 
     angular
         .module('app', [
             'ngMaterial',
             'ui.bootstrap',
-            'Components',
             'angularUtils.directives.uiBreadcrumbs',
-            'ui.router'
+            'ui.router',
+            'Components'
         ])
-        .config(appRouting);
+        .config(function ($stateProvider, $urlRouterProvider) {
+            $stateProvider
+                .state('main', {
+                    url: '/',
+                    templateUrl: 'home.html',
+                    data: {
+                        displayName: "Home"
+                    }
+                });
+            $urlRouterProvider.otherwise('/');
+        });
 })();

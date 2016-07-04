@@ -31,7 +31,7 @@
         createUser(user) {
             var service = this;
             if (service.validateUser(user)) {
-                service.$http.post('/users/create', user)
+                service.$http.post('/users', user)
                     .then(function handleSuccess(response) {
                         console.log(response);
                         return {
@@ -52,8 +52,7 @@
             var usernameRegex = /^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i,
                 userFirstNameRegex = /^[a-z]*?([\s-][a-z]+){0,2}$/i,
                 userLastNameRegex = /^[a-z]{2,20}$/i;
-            return !!(user.username.match(usernameRegex) && user.firstName.match(userFirstNameRegex)
-                && user.lastName.match(userLastNameRegex)
+            return !!(user.username.match(usernameRegex) && user.firstName.match(userFirstNameRegex) && user.lastName.match(userLastNameRegex)
             );
         }
 

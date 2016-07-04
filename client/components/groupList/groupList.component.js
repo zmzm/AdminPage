@@ -8,11 +8,14 @@
             var ctrl = this;
             ctrl.state = $state;
             ctrl.groupList = [];
-            GroupListService.getGroups()
-                .then(function (result) {
-                    ctrl.groupList = result.groups;
-                    console.log(ctrl.groupList);
-                })
+
+            if ($state.current.name == 'groups') {
+                GroupListService.getGroups()
+                    .then(function (result) {
+                        ctrl.groupList = result.groups;
+                    });
+            }
+
         }
     }
 

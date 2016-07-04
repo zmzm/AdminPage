@@ -39,7 +39,7 @@
     }
     UserListService.$inject = ['$http'];
 
-    angular.module(moduleName, ['ui.router'])
+    angular.module(moduleName)
         .service('UserListService', UserListService)
         .component('userList', {
             templateUrl: './components/userList/userList.html',

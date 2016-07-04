@@ -358,7 +358,7 @@ a:focus {
     border-style: hidden;
 }
 
-.user-table tbody tr:hover{
+.user-table tbody tr:hover {
     color: white;
     background-color: #00b3fe;
     cursor: pointer;
@@ -368,4 +368,8 @@ a:focus {
     padding: 0;
     border-radius: 8px;
     border-style: hidden;
+}
+
+.error-message {
+    color: #E44848;
 }

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Group = require('../models/group.js');
+var User = require('../models/user');
 
 router.get('/', function (req, res) {
     Group.find({}, function (err, gr) {
@@ -19,14 +20,14 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post('/create', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var group = req.body;
     Group.findOne({groupName: group.groupName}, function (err, gr) {
         if (err) {
             return next(err);
         }
         else if (gr) {
-            res.status(200).json({
+            res.status(409).json({
                 group: gr,
                 status: 'This group already exist!'
             });
@@ -56,16 +57,43 @@ router.get('/:groupName', function (req, res, next) {
             return next(err);
         }
         else if (gr) {
-            res.status(200).json({
-                group: gr,
-                status: 'Group found!'
+            User.find({group: gr._id}).exec(function (err, users) {
+                res.status(200).json({
+                    group: gr,
+                    users: users,
+                    status: 'Group found!'
+                });
+            });
+        }
+    });
+});
+
+router.put('/:id', function (req, res, next) {
+    var id = req.params.id,
+        group = req.body.group;
+    Group.update({_id: id}, {$set: {groupName: group.groupName, title: group.title}}, function (err, gr) {
+        if (err) {
+            return next(err);
+        }
+        else if (!gr) {
+            res.status(404).json({
+                err: 'Group with name ' + groupName + ' not found.'
+            });
+        }
+        else {
+            User.find({group: gr._id}).exec(function (err, users) {
+                res.status(200).json({
+                    group: gr,
+                    users: users,
+                    status: 'Group successfully updated!'
+                });
             });
         }
     });
 });
 
 router.get('/autocomplete/query', function (req, res) {
-    var regex = new RegExp(req.query["q"], 'i');
+    var regex = new RegExp(req.query.q, 'i');
     Group.find({groupName: regex}).limit(5).exec(function (err, gr) {
         if (err) {
             res.status(500).json({

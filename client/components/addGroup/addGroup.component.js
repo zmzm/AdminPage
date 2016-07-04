@@ -24,7 +24,7 @@
         createGroup(group) {
             var service = this;
             if (service.validateGroup(group)) {
-                service.$http.post('/groups/create', group)
+                service.$http.post('/groups', group)
                     .then(function handleSuccess(response) {
                         console.log(response);
                         return {
