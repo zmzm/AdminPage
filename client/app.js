@@ -2,6 +2,7 @@
     'use strict';
 
     angular.module('Components', []);
+    angular.module('Services', []);
 
     angular
         .module('app', [
@@ -9,7 +10,8 @@
             'ui.bootstrap',
             'angularUtils.directives.uiBreadcrumbs',
             'ui.router',
-            'Components'
+            'Components',
+            'Services'
         ])
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider

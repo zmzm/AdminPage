@@ -143,7 +143,7 @@ router.put('/:id/groups', function (req, res, next) {
         else {
             res.status(200).json({
                 user: us,
-                status: 'USer successfully updated!'
+                status: 'User successfully updated!'
             });
         }
     });
