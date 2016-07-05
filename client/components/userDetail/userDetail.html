@@ -1,21 +1,31 @@
 <div class="panel panel-default container col-lg-6 col-md-5 col-sm-12 user-detail" md-whiteframe="20">
     <div class="panel-heading"><h4>{{$ctrl.user.firstName + " " + $ctrl.user.lastName}}</h4></div>
     <div class="panel-body">
-        <md-content class="md-no-momentum">
-            <md-input-container md-no-float class="md-block">
-                <input type="text" placeholder="Username" ng-model="$ctrl.user.username">
-            </md-input-container>
-            <md-input-container md-no-float class="md-block">
-                <input ng-model="$ctrl.user.firstName" type="text" placeholder="First name">
-            </md-input-container>
-            <md-input-container md-no-float class="md-block">
-                <input ng-model="$ctrl.user.lastName" type="text" placeholder="Last name">
-            </md-input-container>
-            <md-input-container md-no-float class="md-block">
-                <input ng-model="$ctrl.user.email" type="email" placeholder="Email (required)" ng-required="true">
-            </md-input-container>
-        </md-content>
-        <a class="btn btn-theme" style="color: white" ng-click="$ctrl.update()">Save</a>
+        <form name="userForm" novalidate>
+            <md-content class="md-no-momentum">
+                <md-input-container md-no-float class="md-block">
+                    <input type="text" placeholder="Username" ng-model="$ctrl.user.username"
+                           ng-pattern="/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i"
+                           ng-minlength="4" ng-maxlength="20" required/>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="$ctrl.user.firstName" type="text" placeholder="First name"
+                           ng-pattern="/^[a-z]*?([\s-][a-z]+){0,2}$/i"
+                           ng-minlength="2" ng-maxlength="20" required/>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="$ctrl.user.lastName" type="text" placeholder="Last name"
+                           ng-pattern="/^[a-z]{2,20}$/i"
+                           ng-minlength="2" ng-maxlength="20" required/>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="$ctrl.user.email" type="email" placeholder="Email (required)"
+                           ng-minlength="3" ng-maxlength="30" required/>
+                </md-input-container>
+            </md-content>
+            <a class="btn btn-theme" ng-disabled="userForm.$invalid" style="color: white"
+               ng-click="$ctrl.update()">Save</a>
+        </form>
     </div>
 </div>
 <div class="panel panel-default container col-lg-5 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-12 user-detail"

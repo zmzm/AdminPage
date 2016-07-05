@@ -9,6 +9,7 @@
             'ngMaterial',
             'ui.bootstrap',
             'angularUtils.directives.uiBreadcrumbs',
+            'toastr',
             'ui.router',
             'Components',
             'Services'

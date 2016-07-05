@@ -7,15 +7,29 @@
         constructor(GroupListService, $state) {
             var ctrl = this;
             ctrl.state = $state;
+            ctrl.currentPage = 1;
+            ctrl.itemsPerPage = 5;
             ctrl.groupList = [];
+            ctrl.GroupListService = GroupListService;
 
             if ($state.current.name == 'groups') {
-                GroupListService.getGroups()
-                    .then(function (result) {
-                        ctrl.groupList = result.groups;
-                    });
+                ctrl.getGroups(ctrl.currentPage);
             }
 
+        }
+
+        getGroups(page) {
+            var ctrl = this;
+            ctrl.GroupListService.getGroupsByPage(page)
+                .then(function (response) {
+                    ctrl.groupList = response.groups;
+                    ctrl.totalItems = response.totalCount;
+                });
+        }
+
+        changePage() {
+            var ctrl = this;
+            ctrl.getGroups(ctrl.currentPage);
         }
     }
 

@@ -1,15 +1,21 @@
 <div class="panel panel-default container col-lg-6 col-md-5 col-sm-12 user-detail" md-whiteframe="20">
     <div class="panel-heading"><h4>{{$ctrl.groupDetail.title}}</h4></div>
     <div class="panel-body">
-        <md-content class="md-no-momentum">
-            <md-input-container md-no-float class="md-block">
-                <input type="text" placeholder="Group name" ng-model="$ctrl.groupDetail.groupName">
-            </md-input-container>
-            <md-input-container md-no-float class="md-block">
-                <input ng-model="$ctrl.groupDetail.title" type="text" placeholder="Title">
-            </md-input-container>
-        </md-content>
-        <a class="btn btn-theme" style="color: white" ng-click="$ctrl.update()">Update</a>
+        <form name="groupForm" novalidate>
+            <md-content class="md-no-momentum">
+                <md-input-container md-no-float class="md-block">
+                    <input type="text" placeholder="Group name" ng-model="$ctrl.groupDetail.groupName"
+                           ng-pattern="/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i"
+                           ng-minlength="4" ng-maxlength="20" required/>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="$ctrl.groupDetail.title" type="text" placeholder="Title"
+                           ng-pattern="/^[a-z]{2,20}$/i"
+                           ng-minlength="6" ng-maxlength="20" required/>
+                </md-input-container>
+            </md-content>
+            <a class="btn btn-theme" ng-disabled="groupForm.$invalid" style="color: white" ng-click="$ctrl.update()">Update</a>
+        </form>
     </div>
 </div>
 <div class="panel panel-default container col-lg-5 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-12 user-detail"

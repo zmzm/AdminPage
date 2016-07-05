@@ -26,7 +26,7 @@ router.post('/', function (req, res, next) {
             return next(err);
         }
         if (user) {
-            res.status(200).json({
+            res.status(409).json({
                 user: user,
                 status: 'This user already exist!'
             });
@@ -146,6 +146,32 @@ router.put('/:id/groups', function (req, res, next) {
                 status: 'User successfully updated!'
             });
         }
+    });
+});
+
+router.get('/page/:pageNum', function (req, res) {
+    var page = 1;
+    var perPage = 5;
+    var totalCount = 0;
+
+    if (req.params.pageNum) {
+        page = req.params.pageNum;
+    }
+    User.count({}, function (err, count) {
+        totalCount = count;
+    });
+    User.find().skip((page - 1) * perPage).limit(perPage).exec(function (err, users) {
+        if (err) {
+            res.status(500).json({
+                tt: err,
+                err: 'No records found.'
+            });
+        }
+        res.status(200).json({
+            users: users,
+            totalCount: totalCount,
+            status: 'Success.'
+        });
     });
 });
 

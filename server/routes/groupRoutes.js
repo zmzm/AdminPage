@@ -109,4 +109,30 @@ router.get('/autocomplete/query', function (req, res) {
     });
 });
 
+router.get('/page/:pageNum', function (req, res) {
+    var page = 1;
+    var perPage = 5;
+    var totalCount = 0;
+
+    if (req.params.pageNum) {
+        page = req.params.pageNum;
+    }
+    Group.count({}, function (err, count) {
+        totalCount = count;
+    });
+    Group.find().skip((page - 1) * perPage).limit(perPage).exec(function (err, groups) {
+        if (err) {
+            res.status(500).json({
+                status: err,
+                err: 'No records found.'
+            });
+        }
+        res.status(200).json({
+            groups: groups,
+            totalCount: totalCount,
+            status: 'Success.'
+        });
+    });
+});
+
 module.exports = router;

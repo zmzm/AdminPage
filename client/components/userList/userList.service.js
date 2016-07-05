@@ -9,14 +9,15 @@
             service.$http = $http;
         }
 
-        getUsers() {
+        getUsersByPage(page) {
             var service = this;
-            return service.$http.get('/users')
+            return service.$http.get('/users/page/' + page)
                 .then(function handleSuccess(response) {
                     return {
                         status: response.status,
                         message: response.statusText,
-                        users: response.data.users
+                        users: response.data.users,
+                        totalCount: response.data.totalCount
                     };
                 }, function handleError(response) {
                     return response;

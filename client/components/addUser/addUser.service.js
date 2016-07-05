@@ -4,9 +4,10 @@
     var moduleName = 'Services';
 
     class AddUserService {
-        constructor($http) {
+        constructor($http, toastr) {
             var service = this;
             service.$http = $http;
+            service.toastr = toastr;
         }
 
         createUser(user) {
@@ -14,6 +15,7 @@
             if (service.validateUser(user)) {
                 service.$http.post('/users', user)
                     .then(function handleSuccess(response) {
+                        service.toastr.success(response.data.status);
                         console.log(response);
                         return {
                             status: response.status,
@@ -21,6 +23,8 @@
                             user: response.data
                         };
                     }, function handleError(response) {
+                        service.toastr.error(response.data.status);
+                        console.log(response);
                         return response;
                     });
             }
@@ -48,6 +52,8 @@
                 });
         }
     }
+
+    AddUserService.$inject = ['$http', 'toastr'];
 
     angular.module(moduleName)
         .service('AddUserService', AddUserService);

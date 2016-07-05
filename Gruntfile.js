@@ -36,10 +36,11 @@ module.exports = function (grunt) {
                     'client/bower_components/angular-material/angular-material.min.js',
                     'client/bower_components/angular-animate/angular-animate.min.js',
                     'client/bower_components/angular-aria/angular-aria.min.js',
+                    'client/bower_components/angular-toastr/dist/angular-toastr.tpls.js',
                     'client/bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js',
                     'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'client/bower_components/jquery/dist/jquery.min.js',
-                    'client/bower_components/bootstrap/dist/js/bootstrap.min.js',
+                    'client/bower_components/bootstrap/dist/js/bootstrap.tpls.min.js',
                     'client/dist/source.js'],
                 dest: 'client/dist/bundle.js'
             }

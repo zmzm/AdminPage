@@ -4,9 +4,10 @@
     var moduleName = 'Services';
 
     class AddGroupService {
-        constructor($http) {
+        constructor($http, toastr) {
             var service = this;
             service.$http = $http;
+            service.toastr = toastr;
         }
 
         createGroup(group) {
@@ -14,6 +15,7 @@
             if (service.validateGroup(group)) {
                 service.$http.post('/groups', group)
                     .then(function handleSuccess(response) {
+                        service.toastr.success(response.data.status);
                         console.log(response);
                         return {
                             status: response.status,
@@ -21,6 +23,7 @@
                             group: response.data
                         };
                     }, function handleError(response) {
+                        service.toastr.error(response.data.status);
                         return response;
                     });
             }
@@ -35,6 +38,8 @@
             return !!(group.groupName.match(groupNameRegex) && group.title.match(groupTitleRegex));
         }
     }
+
+    AddGroupService.$inject = ['$http', 'toastr'];
 
     angular.module(moduleName)
         .service('AddGroupService', AddGroupService)

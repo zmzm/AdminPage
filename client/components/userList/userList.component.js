@@ -7,11 +7,25 @@
         constructor(UserListService, $state) {
             var ctrl = this;
             ctrl.state = $state;
+            ctrl.UserListService = UserListService;
+            ctrl.currentPage = 1;
+            ctrl.itemsPerPage = 5;
             ctrl.userList = [];
-            UserListService.getUsers()
+            ctrl.getUsers(ctrl.currentPage);
+        }
+
+        getUsers(page) {
+            var ctrl = this;
+            ctrl.UserListService.getUsersByPage(page)
                 .then(function (response) {
                     ctrl.userList = response.users;
+                    ctrl.totalItems = response.totalCount;
                 });
+        }
+
+        changePage() {
+            var ctrl = this;
+            ctrl.getUsers(ctrl.currentPage);
         }
     }
 

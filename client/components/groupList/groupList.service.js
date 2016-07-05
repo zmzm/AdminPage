@@ -9,14 +9,15 @@
             service.$http = $http;
         }
 
-        getGroups() {
+        getGroupsByPage(page) {
             var service = this;
-            return service.$http.get('/groups')
+            return service.$http.get('/groups/page/' + page)
                 .then(function handleSuccess(response) {
                     return {
                         status: response.status,
                         message: response.statusText,
-                        groups: response.data.groups
+                        groups: response.data.groups,
+                        totalCount: response.data.totalCount
                     };
                 }, function handleError(response) {
                     return response;
