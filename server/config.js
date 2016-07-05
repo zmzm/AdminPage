@@ -1,8 +1,13 @@
 var config = {};
 
-config.db = {};
+config.development = {
+    host: 'mongodb://localhost/',
+    database: 'admin'
+};
 
-config.db.host = 'mongodb://localhost/';
-config.db.name = 'admin';
+config.test = {
+    host: 'mongodb://localhost/',
+    database: 'admin-test'
+};
 
 module.exports = config;

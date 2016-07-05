@@ -6,8 +6,8 @@
     "url": "https://github.com/zmzm/AdminPage.git"
   },
   "scripts": {
-    "start": "node server/app.js",
-    "serverTests": "grunt mochaTest"
+    "start": "NODE_ENV=development node server/app.js",
+    "test": "NODE_ENV=test grunt mochaTest"
   },
   "devDependencies": {
     "grunt": "1.0.1",

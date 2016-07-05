@@ -53,10 +53,6 @@ module.exports = function (grunt) {
         },
         mochaTest: {
             test: {
-                options: {
-                    reporter: 'spec',
-                    captureFile: 'results.txt'
-                },
                 src: ['server/tests/*.js']
             }
         }

@@ -10,7 +10,14 @@ var userRoutes = require('./routes/userRoutes');
 var groupRoutes = require('./routes/groupRoutes');
 var config = require('./config.js');
 
-mongoose.connect(config.db.host + config.db.name);
+if (app.get('env') === 'development') {
+    mongoose.connect(config.development.host + config.development.database);
+    console.log('development')
+}
+else {
+    mongoose.connect(config.test.host + config.test.database);
+    console.log('test');
+}
 
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(logger('dev'));
