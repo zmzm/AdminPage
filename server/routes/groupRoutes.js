@@ -71,22 +71,32 @@ router.get('/:groupName', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
     var id = req.params.id,
         group = req.body.group;
-    Group.update({_id: id}, {$set: {groupName: group.groupName, title: group.title}}, function (err, gr) {
+    Group.find({
+        groupName: group.groupName,
+        $and: [{_id: {$ne: id}}]
+    }).exec(function (err, gr) {
         if (err) {
             return next(err);
         }
-        else if (!gr) {
-            res.status(404).json({
-                err: 'Group with name ' + groupName + ' not found.'
+        if (gr.length > 0) {
+            res.status(409).json({
+                group: gr,
+                status: 'Group with this name already exists!'
             });
         }
         else {
-            User.find({group: gr._id}).exec(function (err, users) {
-                res.status(200).json({
-                    group: gr,
-                    users: users,
-                    status: 'Group successfully updated!'
-                });
+            Group.update({_id: id}, {
+                $set: {groupName: group.groupName, title: group.title}
+            }, function (err, gr) {
+                if (err) {
+                    return next(err);
+                }
+                else {
+                    res.status(200).json({
+                        user: gr,
+                        status: 'Group successfully updated!'
+                    });
+                }
             });
         }
     });

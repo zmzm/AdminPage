@@ -19,7 +19,7 @@
             var ctrl = this;
             ctrl.GroupDetailService.updateGroup(ctrl.groupDetail)
                 .then(function (result) {
-                    console.log(result);
+                    //console.log(result);
                 });
         }
     }

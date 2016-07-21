@@ -19,7 +19,7 @@ else {
     console.log('test');
 }
 
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../react-client')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -31,11 +31,11 @@ app.use(expressSession({
 }));
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../client', 'index.html'));
+    res.sendFile(path.join(__dirname, '../react-client', 'index.html'));
 });
 
-app.use('/users/', userRoutes);
-app.use('/groups/', groupRoutes);
+app.use('/api/users/', userRoutes);
+app.use('/api/groups/', groupRoutes);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

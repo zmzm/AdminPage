@@ -13,7 +13,7 @@
             var ctrl = this;
             ctrl.user.group = ctrl.asyncSelected._id;
             ctrl.UserCreateService.createUser(ctrl.user);
-            ctrl.user = {};
+            //ctrl.user = {};
         }
 
         findGroup(value) {

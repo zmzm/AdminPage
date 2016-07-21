@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['Gruntfile.js', 'client/components/**/*.js', 'client/app.js', 'server/models/*.js', 'server/*.js', 'server/routes/*.js'],
+            files: ['Gruntfile(angular-nodejs).js', 'client/components/**/*.js', 'client/app.js', 'server/models/*.js', 'server/*.js', 'server/routes/*.js'],
             options: {
                 globals: {
                     jQuery: true

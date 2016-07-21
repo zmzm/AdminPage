@@ -13,19 +13,34 @@ describe('Groups', function () {
         });
     });
 
+    var group = {
+        'groupName': 'test',
+        'title': 'testTitle'
+    };
+
     it('should add a SINGLE group on /groups POST', function (done) {
         chai.request(server)
             .post('/groups')
-            .send({
-                'groupName': 'test',
-                'title': 'testTitle'
-            })
+            .send(group)
             .end(function (err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('object');
                 done();
             })
+    });
+
+    it('should throw 409 error, group exist', function (done) {
+        chai.request(server)
+            .post('/groups')
+            .send(group)
+            .end(function (err, res) {
+                res.should.have.status(409);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.status.should.equal('This group already exist!');
+                done();
+            });
     });
 
     it('should list ALL groups on /groups GET', function (done) {
@@ -61,20 +76,35 @@ describe('Users', function () {
         });
     });
 
+    var user = {
+        'username': 'test',
+        'firstName': 'test',
+        'lastName': 'test',
+        'email': 'test@test.test',
+        'group': '576a4a9fed9c66cd16ffd30b'
+    };
+
     it('should add a SINGLE user on /users POST', function (done) {
         chai.request(server)
             .post('/users')
-            .send({
-                'username': 'test',
-                'firstName': 'test',
-                'lastName': 'test',
-                'email': 'test@test.test',
-                'group': '576a4a9fed9c66cd16ffd30b'
-            })
+            .send(user)
             .end(function (err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('object');
+                done();
+            });
+    });
+
+    it('should throw 409 error, user exist', function (done) {
+        chai.request(server)
+            .post('/users')
+            .send(user)
+            .end(function (err, res) {
+                res.should.have.status(409);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.status.should.equal('This user already exist!');
                 done();
             });
     });

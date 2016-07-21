@@ -4,9 +4,10 @@
     var moduleName = 'Services';
 
     class GroupDetailService {
-        constructor($http) {
+        constructor($http, toastr) {
             var service = this;
             service.$http = $http;
+            service.toastr = toastr;
         }
 
         findByGroupName(groupName) {
@@ -28,6 +29,8 @@
             var service = this;
             return service.$http.put('/groups/' + group._id, {group: group})
                 .then(function handleSuccess(response) {
+                    console.log(response);
+                    service.toastr.success(response.data.status);
                     return {
                         status: response.status,
                         message: response.statusText,
@@ -35,12 +38,14 @@
                         users: response.data.users
                     };
                 }, function handleError(response) {
+                    console.log(response);
+                    service.toastr.error(response.data.status);
                     return response;
                 });
         }
     }
 
-    GroupDetailService.$inject = ['$http'];
+    GroupDetailService.$inject = ['$http', 'toastr'];
 
     angular.module(moduleName)
         .service('GroupDetailService', GroupDetailService);

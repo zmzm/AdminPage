@@ -1,12 +1,13 @@
 (function () {
     'use strict';
-    
+
     var moduleName = 'Services';
 
     class UserDetailService {
-        constructor($http) {
+        constructor($http, toastr) {
             var service = this;
             service.$http = $http;
+            service.toastr = toastr;
         }
 
         findByUsername(username) {
@@ -27,12 +28,15 @@
             var service = this;
             return service.$http.put('/users/' + user._id, {user: user})
                 .then(function handleSuccess(response) {
+                    service.toastr.success(response.data.status);
+                    console.log(response);
                     return {
                         status: response.status,
                         message: response.statusText,
                         user: response.data.user
                     };
                 }, function handleError(response) {
+                    service.toastr.error(response.data.status);
                     return response;
                 });
         }
@@ -76,6 +80,8 @@
                 });
         }
     }
+
+    UserDetailService.$inject = ['$http', 'toastr'];
 
     angular.module(moduleName)
         .service('UserDetailService', UserDetailService);

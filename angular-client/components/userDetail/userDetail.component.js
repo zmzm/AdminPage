@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    
+
     var moduleName = 'Components';
 
     class UserDetailController {
@@ -19,7 +19,7 @@
             var ctrl = this;
             ctrl.UserDetailService.updateUser(ctrl.user)
                 .then(function (result) {
-                    console.log(result);
+                    //console.log(result);
                 });
         }
 
@@ -28,7 +28,7 @@
             ctrl.UserDetailService.removeGroup(userId, group)
                 .then(function (result) {
                     console.log(result);
-                    ctrl.user = result;
+                    ctrl.user = result.user;
                 });
         }
 
@@ -43,6 +43,7 @@
             ctrl.UserDetailService.addGroup(ctrl.user._id, ctrl.asyncSelected._id)
                 .then(function (result) {
                     console.log(result);
+                    ctrl.user = result.user;
                 });
         }
     }

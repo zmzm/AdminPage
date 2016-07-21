@@ -72,26 +72,37 @@ router.get('/:userName', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
     var id = req.params.id,
         user = req.body.user;
-    User.update({_id: id}, {
-        $set: {
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-        }
-    }, function (err, us) {
+    User.find({
+        $or: [{email: user.email}, {username: user.username}],
+        $and: [{_id: {$ne: id}}]
+    }).exec(function (err, us) {
         if (err) {
             return next(err);
         }
-        else if (!us) {
-            res.status(404).json({
-                err: 'User with name ' + user.username + ' not found.'
+        if (us.length > 0) {
+            res.status(409).json({
+                user: us,
+                status: 'User with this username/email already exists!'
             });
         }
         else {
-            res.status(200).json({
-                user: us,
-                status: 'USer successfully updated!'
+            User.update({_id: id}, {
+                $set: {
+                    username: user.username,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email
+                }
+            }, function (err, us) {
+                if (err) {
+                    return next(err);
+                }
+                else {
+                    res.status(200).json({
+                        user: us,
+                        status: 'User successfully updated!'
+                    });
+                }
             });
         }
     });
@@ -100,12 +111,11 @@ router.put('/:id', function (req, res, next) {
 router.delete('/:id/groups/:id1', function (req, res, next) {
     var userId = req.params.id,
         groupId = req.params.id1;
-    console.log(userId + " " + groupId);
     User.findOneAndUpdate({_id: userId}, {
         $pull: {
             group: {$in: [groupId]}
         }
-    }, function (err, us) {
+    }).exec(function (err, us) {
         if (err) {
             return next(err);
         }
@@ -115,11 +125,12 @@ router.delete('/:id/groups/:id1', function (req, res, next) {
             });
         }
         else {
-
-            res.status(200).json({
-                user: us,
-                status: 'User successfully updated!'
-            });
+            User.findOne({_id: userId}).populate({path: 'group', model: 'groups'}).exec(function (err, result) {
+                res.status(200).json({
+                    user: result,
+                    status: 'User successfully updated!'
+                });
+            })
         }
     });
 });
@@ -131,7 +142,7 @@ router.put('/:id/groups', function (req, res, next) {
         $push: {
             group: group
         }
-    }, function (err, us) {
+    }).exec(function (err, us) {
         if (err) {
             return next(err);
         }
@@ -141,10 +152,12 @@ router.put('/:id/groups', function (req, res, next) {
             });
         }
         else {
-            res.status(200).json({
-                user: us,
-                status: 'User successfully updated!'
-            });
+            User.findOne({_id: id}).populate({path: 'group', model: 'groups'}).exec(function (err, result) {
+                res.status(200).json({
+                    user: result,
+                    status: 'User successfully updated!'
+                });
+            })
         }
     });
 });

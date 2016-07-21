@@ -12,7 +12,7 @@
         create() {
             var ctrl = this;
             ctrl.AddGroupService.createGroup(ctrl.group);
-            ctrl.group = {};
+            //ctrl.group = {};
         }
     }
 

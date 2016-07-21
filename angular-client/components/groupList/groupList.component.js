@@ -11,11 +11,7 @@
             ctrl.itemsPerPage = 5;
             ctrl.groupList = [];
             ctrl.GroupListService = GroupListService;
-
-            if ($state.current.name == 'groups') {
-                ctrl.getGroups(ctrl.currentPage);
-            }
-
+            ctrl.getGroups(ctrl.currentPage);
         }
 
         getGroups(page) {
