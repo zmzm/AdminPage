@@ -5,7 +5,7 @@ import configureStore from './store/configureStore';
 
 import App from './containers/app';
 import Home from './components/home';
-import UserList from './components/userList';
+import UserList from './containers/usersListContainer';
 import NotFound from './components/notFound';
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -19,7 +19,7 @@ ReactDOM.render((
                     <IndexRoute component={Home}/>
                     <Route path='users' component={UserList}/>
                 </Route>
-                <Router path='*' component={NotFound}/>
+                <Route path='*' component={NotFound}/>
             </Router>
         </Provider>),
     document.getElementById('root')

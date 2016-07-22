@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = {
     entry: [
+        'babel-polyfill',
         './react-client/js/index.js'
     ],
     output: {
@@ -15,8 +16,9 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel',
+                plugins: ['transform-runtime'],
                 query: {
-                    presets: ['es2015', 'react']
+                    presets: ['es2015', 'react', 'stage-0']
                 }
             },
             {

@@ -1,13 +1,22 @@
-const initialState = {};
+import ActionTypes from '../constants/actionTypes';
 
-export default function userstate(state = initialState, action) {
+const initialState = {
+    users: [],
+    error: null
+};
+
+export default function (state = initialState, action) {
 
     switch (action.type) {
-
-        case 'NOT_IMPLEMENTED':
-            // TODO
-            return state;
-
+        case ActionTypes.FETCH_USERS:
+            return { ...state, users: [], error: null};
+            break;
+        case ActionTypes.FETCH_USERS_SUCCESS:
+            return { ...state, users: action.payload, error: null};
+            break;
+        case ActionTypes.FETCH_USERS_FAIL:
+            return { ...state, users: [], error: action.payload};
+            break;
         default:
             return state;
     }
