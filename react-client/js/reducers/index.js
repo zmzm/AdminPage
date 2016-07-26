@@ -1,8 +1,12 @@
-import {combineReducers} from 'redux'
-import user from './user.reducer'
+import {combineReducers} from 'redux';
+import user from './userReducer';
+import group from './groupReducer';
+import {reducer as formReducer} from 'redux-form';
 
 const rootReducer = combineReducers({
-    user
+    user,
+    group,
+    form: formReducer
 });
 
 export default rootReducer;

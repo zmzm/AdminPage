@@ -5,7 +5,8 @@ import configureStore from './store/configureStore';
 
 import App from './containers/app';
 import Home from './components/home';
-import UserList from './containers/usersListContainer';
+import UserList from './containers/userListContainer';
+import GroupList from './containers/groupListContainer';
 import NotFound from './components/notFound';
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -18,6 +19,7 @@ ReactDOM.render((
                 <Route path='/' component={App}>
                     <IndexRoute component={Home}/>
                     <Route path='users' component={UserList}/>
+                    <Route path='groups' component={GroupList}/>
                 </Route>
                 <Route path='*' component={NotFound}/>
             </Router>

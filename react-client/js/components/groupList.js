@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import User from './user';
 import {Pagination} from 'react-bootstrap';
+import Group from './group';
 
-class UserList extends Component {
+class GroupList extends Component {
     componentWillMount() {
-        this.props.fetchUsers();
+        this.props.fetchGroups();
     }
 
-    renderUsers(users) {
-        return users.map(function (user) {
-            return <User key={user._id} user={user}/>
+    renderGroups(groups) {
+        return groups.map(function (group) {
+            return <Group key={group._id} group={group}/>
         })
     }
 
     render() {
-        const {users, totalCount} = this.props;
+        const {groups, totalCount} = this.props;
         return (
             <div>
                 <div style=
@@ -25,25 +25,23 @@ class UserList extends Component {
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Username</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
+                            <th>Groupname</th>
+                            <th>Title</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {this.renderUsers(users)}
+                        {this.renderGroups(groups)}
                         </tbody>
                     </table>
                 </div>
                 <Pagination
-                    className={users.length === 0? 'hidden':'shown'}
+                    className={groups.length === 0? 'hidden':'shown'}
                     prev
                     next
                     first
                     last
                     ellipsis
-                    items={Math.round(totalCount / 5)}
+                    items={Math.ceil(totalCount / 5)}
                     activePage={1}
                     onSelect={this.handleSelect}>
                 </Pagination>
@@ -52,4 +50,4 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
+export default GroupList;
