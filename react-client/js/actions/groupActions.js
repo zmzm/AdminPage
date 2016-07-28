@@ -1,5 +1,6 @@
 import ActionTypes from '../constants/actionTypes';
 import axios from 'axios';
+import toastr from 'toastr';
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
@@ -22,10 +23,11 @@ export function fetchGroupsSuccess(data) {
     }
 }
 
-export function fetchGroupsFailure(error) {
+export function fetchGroupsFailure(data) {
+    toastr.error(data.status);
     return {
         type: ActionTypes.FETCH_GROUPS_FAIL,
-        payload: error
+        payload: data.status
     }
 }
 
@@ -42,16 +44,18 @@ export function createGroup(props) {
     }
 }
 
-export function createGroupSuccess(group) {
+export function createGroupSuccess(data) {
+    toastr.success(data.status);
     return {
         type: ActionTypes.CREATE_GROUP_SUCCESS,
-        payload: group
+        payload: data
     }
 }
 
-export function createGroupFailure(error) {
+export function createGroupFailure(data) {
+    toastr.error(data.status);
     return {
         type: ActionTypes.CREATE_GROUP_FAIL,
-        payload: error
+        payload: data.status
     }
 }

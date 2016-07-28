@@ -1,5 +1,6 @@
 import ActionTypes from '../constants/actionTypes';
 import axios from 'axios';
+import toastr from 'toastr';
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
@@ -22,10 +23,11 @@ export function fetchUsersSuccess(data) {
     }
 }
 
-export function fetchUsersFailure(error) {
+export function fetchUsersFailure(data) {
+    toastr.error(data.status);
     return {
         type: ActionTypes.FETCH_USERS_FAIL,
-        payload: error
+        payload: data.status
     }
 }
 
@@ -42,16 +44,19 @@ export function createUser(props) {
     }
 }
 
-export function createUserSuccess(user) {
+export function createUserSuccess(data) {
+    toastr.success(data.status);
     return {
         type: ActionTypes.CREATE_USER_SUCCESS,
-        payload: user
+        payload: data
     }
 }
 
-export function createUserFailure(error) {
+export function createUserFailure(data) {
+    console.log(data);
+    toastr.error(data.status);
     return {
         type: ActionTypes.CREATE_USER_FAIL,
-        payload: error
+        payload: data.status
     }
 }

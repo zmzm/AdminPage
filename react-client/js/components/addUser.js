@@ -3,7 +3,7 @@ import {Form, FormGroup, Col, FormControl, Button} from 'react-bootstrap';
 
 class AddUser extends Component {
     render() {
-        const {fields: {userName, firstName, lastName, email}, handleSubmit, submitting} = this.props;
+        const {fields: {username, firstName, lastName, email}, handleSubmit, invalid} = this.props;
         return (
             <div className="col-lg-5 col-md-5 col-sm-12" style=
                 {{backgroundColor:'whitesmoke',
@@ -13,8 +13,8 @@ class AddUser extends Component {
                     <h2 style={{color: "black"}}>Add user</h2>
                     <FormGroup controlId="formHorizontalUserName">
                         <Col lg={10} lgOffset={1} md={8} mdOffset={2}>
-                            <FormControl type="text" placeholder="Username" {...userName}/>
-                            {userName.touched && userName.error && <div style={{color:'red'}}>{userName.error}</div>}
+                            <FormControl type="text" placeholder="Username" {...username}/>
+                            {username.touched && username.error && <div style={{color:'red'}}>{username.error}</div>}
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalFirstName">
@@ -37,7 +37,7 @@ class AddUser extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col lg={10} lgOffset={1}>
-                            <Button disabled={submitting} type="submit">
+                            <Button disabled={invalid} type="submit">
                                 Add
                             </Button>
                         </Col>

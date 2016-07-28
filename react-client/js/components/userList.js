@@ -4,6 +4,7 @@ import {Pagination} from 'react-bootstrap';
 
 class UserList extends Component {
     componentWillMount() {
+        this.activePage = 1;
         this.props.fetchUsers();
     }
 
@@ -11,6 +12,11 @@ class UserList extends Component {
         return users.map(function (user) {
             return <User key={user._id} user={user}/>
         })
+    }
+
+    handleSelect(event) {
+        this.activePage = event;
+        this.props.fetchUsers(event);
     }
 
     render() {
@@ -44,8 +50,8 @@ class UserList extends Component {
                     last
                     ellipsis
                     items={Math.round(totalCount / 5)}
-                    activePage={1}
-                    onSelect={this.handleSelect}>
+                    activePage={this.activePage}
+                    onSelect={this.handleSelect.bind(this)}>
                 </Pagination>
             </div>
         );

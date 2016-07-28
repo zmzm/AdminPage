@@ -9,13 +9,13 @@ import UserList from './containers/userListContainer';
 import GroupList from './containers/groupListContainer';
 import NotFound from './components/notFound';
 
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 
 const store = configureStore();
 
 ReactDOM.render((
         <Provider store={store}>
-            <Router history={browserHistory}>
+            <Router history={hashHistory} queryKey={false}>
                 <Route path='/' component={App}>
                     <IndexRoute component={Home}/>
                     <Route path='users' component={UserList}/>

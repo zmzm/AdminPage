@@ -34,7 +34,7 @@ const mapDispatchToProps = function (dispatch) {
             dispatch(createGroup(values)).then(function (response) {
                 response.payload.status == 200 ?
                     dispatch(createGroupSuccess(response.payload.data)) :
-                    dispatch(createGroupFailure(response.payload))
+                    dispatch(createGroupFailure(response.payload.response.data))
             })
         }
     }

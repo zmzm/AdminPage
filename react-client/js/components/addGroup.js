@@ -3,7 +3,7 @@ import {Form, FormGroup, Col, FormControl, Button} from 'react-bootstrap';
 
 class AddGroup extends Component {
     render() {
-        const {fields: {title, groupName}, handleSubmit, submitting} = this.props;
+        const {fields: {title, groupName}, handleSubmit, invalid} = this.props;
         return (
             <div className="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-12" style=
                 {{backgroundColor:'whitesmoke',
@@ -25,7 +25,7 @@ class AddGroup extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col lg={10} lgOffset={1}>
-                            <Button disabled={submitting} type="submit">
+                            <Button disabled={invalid} type="submit">
                                 Add
                             </Button>
                         </Col>

@@ -4,6 +4,7 @@ import Group from './group';
 
 class GroupList extends Component {
     componentWillMount() {
+        this.activePage = 1;
         this.props.fetchGroups();
     }
 
@@ -11,6 +12,11 @@ class GroupList extends Component {
         return groups.map(function (group) {
             return <Group key={group._id} group={group}/>
         })
+    }
+
+    handleSelect(event) {
+        this.activePage = event;
+        this.props.fetchGroups(event);
     }
 
     render() {
@@ -42,8 +48,8 @@ class GroupList extends Component {
                     last
                     ellipsis
                     items={Math.ceil(totalCount / 5)}
-                    activePage={1}
-                    onSelect={this.handleSelect}>
+                    activePage={this.activePage}
+                    onSelect={this.handleSelect.bind(this)}>
                 </Pagination>
             </div>
         );

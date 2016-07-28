@@ -12,11 +12,11 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
     return {
-        fetchUsers: function () {
-            dispatch(fetchUsers()).then(function (response) {
+        fetchUsers: function (page) {
+            dispatch(fetchUsers(page)).then(function (response) {
                 response.payload.status == 200 ?
                     dispatch(fetchUsersSuccess(response.payload.data)) :
-                    dispatch(fetchUsersFailure(response.payload))
+                    dispatch(fetchUsersFailure(response.payload.data))
             });
         }
     }

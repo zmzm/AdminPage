@@ -16,7 +16,7 @@ const mapDispatchToProps = function (dispatch) {
             dispatch(fetchGroups(page)).then(function (response) {
                 response.payload.status == 200 ?
                     dispatch(fetchGroupsSuccess(response.payload.data)) :
-                    dispatch(fetchGroupsFailure(response.payload))
+                    dispatch(fetchGroupsFailure(response.payload.data))
             });
         }
     }

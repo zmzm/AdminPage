@@ -6,11 +6,11 @@ import AddUser from '../components/addUser';
 function validate(values) {
     const errors = {};
 
-    if (!values.userName || values.userName.trim() === '') {
-        errors.userName = 'Enter a user name';
+    if (!values.username || values.username.trim() === '') {
+        errors.username = 'Enter a user name';
     }
-    else if (!/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i.test(values.userName)) {
-        errors.userName = 'Invalid User name';
+    else if (!/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i.test(values.username)) {
+        errors.username = 'Invalid User name';
     }
 
     if (!values.firstName || values.firstName.trim() === '') {
@@ -31,9 +31,6 @@ function validate(values) {
 }
 
 const mapStateToProps = function (state) {
-    return {
-        user: state.user.user
-    }
 };
 
 const mapDispatchToProps = function (dispatch) {
@@ -42,7 +39,7 @@ const mapDispatchToProps = function (dispatch) {
             dispatch(createUser(values)).then(function (response) {
                 response.payload.status == 200 ?
                     dispatch(createUserSuccess(response.payload.data)) :
-                    dispatch(createUserFailure(response.payload))
+                    dispatch(createUserFailure(response.payload.response.data))
             })
         }
     }
@@ -50,6 +47,6 @@ const mapDispatchToProps = function (dispatch) {
 
 export default reduxForm({
     form: 'addUser',
-    fields: ['userName', 'firstName', 'lastName', 'email'],
+    fields: ['username', 'firstName', 'lastName', 'email'],
     validate
 }, mapStateToProps, mapDispatchToProps)(AddUser);
