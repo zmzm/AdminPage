@@ -7,6 +7,8 @@ import App from './containers/app';
 import Home from './components/home';
 import UserList from './containers/userListContainer';
 import GroupList from './containers/groupListContainer';
+import GroupDetail from './containers/groupDetailContainer';
+import UserDetail from './containers/userDetailContainer';
 import NotFound from './components/notFound';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
@@ -19,7 +21,9 @@ ReactDOM.render((
                 <Route path='/' component={App}>
                     <IndexRoute component={Home}/>
                     <Route path='users' component={UserList}/>
+                    <Route path='users/:userName' component={UserDetail}/>
                     <Route path='groups' component={GroupList}/>
+                    <Route path='groups/:groupName' component={GroupDetail}/>
                 </Route>
                 <Route path='*' component={NotFound}/>
             </Router>

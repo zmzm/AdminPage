@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 
 class User extends Component {
     render() {
@@ -7,7 +8,7 @@ class User extends Component {
         return (
             <tr>
                 <th scope="row">#</th>
-                <td>{user.username}</td>
+                <td><Link to={"/users/" + user.username}>{user.username}</Link></td>
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>

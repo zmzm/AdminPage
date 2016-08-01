@@ -60,3 +60,59 @@ export function createUserFailure(data) {
         payload: data.status
     }
 }
+
+export function fetchUser(props) {
+    const request = axios({
+        method: 'GET',
+        url: ROOT_URL + '/users/' + props
+    });
+
+    return {
+        type: ActionTypes.FETCH_USER,
+        payload: request
+    }
+}
+
+export function fetchUserSuccess(data) {
+    return {
+        type: ActionTypes.FETCH_USER_SUCCESS,
+        payload: data
+    }
+}
+
+export function fetchUserFailure(data) {
+    toastr.error(data.status);
+    return {
+        type: ActionTypes.FETCH_USER_FAIL,
+        payload: data.status
+    }
+}
+
+export function updateUser(props) {
+    const request = axios({
+        method: 'PUT',
+        data: props,
+        url: ROOT_URL + '/users/' + props.user._id
+    });
+
+    return {
+        type: ActionTypes.UPDATE_USER,
+        payload: request
+    }
+}
+
+export function updateUserSuccess(data) {
+    toastr.success(data.status);
+    return {
+        type: ActionTypes.UPDATE_USER_SUCCESS,
+        payload: data
+    }
+}
+
+export function updateUserFailure(data) {
+    toastr.error(data.status);
+    return {
+        type: ActionTypes.UPDATE_USER_FAIL,
+        payload: data.status
+    }
+}

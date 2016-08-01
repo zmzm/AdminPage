@@ -59,3 +59,59 @@ export function createGroupFailure(data) {
         payload: data.status
     }
 }
+
+export function fetchGroup(props) {
+    const request = axios({
+        method: 'GET',
+        url: ROOT_URL + '/groups/' + props
+    });
+
+    return {
+        type: ActionTypes.FETCH_GROUP,
+        payload: request
+    }
+}
+
+export function fetchGroupSuccess(data) {
+    return {
+        type: ActionTypes.FETCH_GROUP_SUCCESS,
+        payload: data
+    }
+}
+
+export function fetchGroupFailure(data) {
+    toastr.error(data.status);
+    return {
+        type: ActionTypes.FETCH_GROUP_FAIL,
+        payload: data.status
+    }
+}
+
+export function updateGroup(props) {
+    const request = axios({
+        method: 'PUT',
+        data: props,
+        url: ROOT_URL + '/groups/' + props.group._id
+    });
+
+    return {
+        type: ActionTypes.UPDATE_GROUP,
+        payload: request
+    }
+}
+
+export function updateGroupSuccess(data) {
+    toastr.success(data.status);
+    return {
+        type: ActionTypes.UPDATE_GROUP_SUCCESS,
+        payload: data
+    }
+}
+
+export function updateGroupFailure(data) {
+    toastr.error(data.status);
+    return {
+        type: ActionTypes.UPDATE_GROUP_FAIL,
+        payload: data.status
+    }
+}

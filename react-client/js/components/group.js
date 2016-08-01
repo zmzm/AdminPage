@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 
 class Group extends Component {
     render() {
@@ -7,7 +8,7 @@ class Group extends Component {
         return (
             <tr>
                 <th scope="row">#</th>
-                <td>{group.groupName}</td>
+                <td><Link to={"/groups/" + group.groupName}>{group.groupName}</Link></td>
                 <td>{group.title}</td>
             </tr>
         );

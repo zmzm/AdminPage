@@ -18,13 +18,31 @@ export default function (state = initialState, action) {
             return {...state, users: [], error: action.payload};
             break;
         case ActionTypes.CREATE_USER:
-            return {...state, user: [], error: null};
+            return {...state, error: null};
             break;
         case ActionTypes.CREATE_USER_SUCCESS:
-            return {...state, user: action.payload.user, error: null};
+            return {...state, error: null};
             break;
         case ActionTypes.CREATE_USER_FAIL:
-            return {...state, user: [], error: action.payload};
+            return {...state, error: action.payload};
+            break;
+        case ActionTypes.FETCH_USER:
+            return {...state, error: null};
+            break;
+        case ActionTypes.FETCH_USER_SUCCESS:
+            return {...state, user: action.payload.user[0], error: null};
+            break;
+        case ActionTypes.FETCH_USER_FAIL:
+            return {...state, error: action.payload};
+            break;
+        case ActionTypes.UPDATE_USER:
+            return {...state, error: null};
+            break;
+        case ActionTypes.UPDATE_USER_SUCCESS:
+            return {...state, error: null};
+            break;
+        case ActionTypes.UPDATE_USER_FAIL:
+            return {...state, error: action.payload};
             break;
         default:
             return state;

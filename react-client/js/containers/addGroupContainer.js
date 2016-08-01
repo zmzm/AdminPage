@@ -9,23 +9,20 @@ function validate(values) {
     if (!values.groupName || values.groupName.trim() === '') {
         errors.groupName = 'Enter a Group name';
     }
-    else if(!/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i.test(values.groupName)){
+    else if (!/^[a-z][a-z0-9]*?([-.][a-z0-9]+){0,2}$/i.test(values.groupName)) {
         errors.groupName = 'Invalid Group name';
     }
 
     if (!values.title || values.title.trim() === '') {
         errors.title = 'Enter title';
     }
-    else if(!/^[a-z]{2,20}$/i.test(values.title)){
+    else if (!/^[a-z]{2,20}$/i.test(values.title)) {
         errors.title = 'Invalid title';
     }
     return errors;
 }
 
 const mapStateToProps = function (state) {
-    return {
-        group: state.group.group
-    }
 };
 
 const mapDispatchToProps = function (dispatch) {

@@ -18,13 +18,31 @@ export default function (state = initialState, action) {
             return {...state, groups: [], error: action.payload};
             break;
         case ActionTypes.CREATE_GROUP:
-            return {...state, group: [], error: null};
+            return {...state, error: null};
             break;
         case ActionTypes.CREATE_GROUP_SUCCESS:
-            return {...state, group: action.payload.group, error: null};
+            return {...state, error: null};
             break;
         case ActionTypes.CREATE_GROUP_FAIL:
+            return {...state, error: action.payload};
+            break;
+        case ActionTypes.FETCH_GROUP:
+            return {...state, group: [], error: null};
+            break;
+        case ActionTypes.FETCH_GROUP_SUCCESS:
+            return {...state, group: action.payload.group, error: null};
+            break;
+        case ActionTypes.FETCH_GROUP_FAIL:
             return {...state, group: [], error: action.payload};
+            break;
+        case ActionTypes.UPDATE_GROUP:
+            return {...state, group: [], error: null};
+            break;
+        case ActionTypes.UPDATE_GROUP_SUCCESS:
+            return {...state, error: null};
+            break;
+        case ActionTypes.UPDATE_GROUP_FAIL:
+            return {...state, error: action.payload};
             break;
         default:
             return state;
