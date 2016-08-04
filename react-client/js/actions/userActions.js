@@ -88,6 +88,12 @@ export function fetchUserFailure(data) {
     }
 }
 
+export function resetActiveUser() {
+    return {
+        type: ActionTypes.RESET_ACTIVE_USER
+    }
+}
+
 export function updateUser(props) {
     const request = axios({
         method: 'PUT',
@@ -113,6 +119,37 @@ export function updateUserFailure(data) {
     toastr.error(data.status);
     return {
         type: ActionTypes.UPDATE_USER_FAIL,
+        payload: data.status
+    }
+}
+
+export function addGroupToUser(userId, group) {
+    const request = axios({
+        method: 'PUT',
+        data: group,
+        url: ROOT_URL + '/users/' + userId + '/groups'
+    });
+
+    return {
+        type: ActionTypes.ADD_GROUP_TO_USER,
+        payload: request
+    }
+}
+
+export function addGroupToUserSuccess(data) {
+    console.log(data);
+    toastr.success(data.status);
+    return {
+        type: ActionTypes.ADD_GROUP_TO_USER_SUCCESS,
+        payload: data
+    }
+}
+
+export function addGroupToUserFailure(data) {
+    console.log(data);
+    toastr.error(data.status);
+    return {
+        type: ActionTypes.ADD_GROUP_TO_USER_FAIL,
         payload: data.status
     }
 }

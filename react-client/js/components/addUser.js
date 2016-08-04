@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import {Form, FormGroup, Col, FormControl, Button} from 'react-bootstrap';
 
 class AddUser extends Component {
-    constructor() {
-        super();
-        this.typeahead = 'test test';
-    }
-
     render() {
         const {fields: {username, firstName, lastName, email}, handleSubmit, invalid} = this.props;
         return (

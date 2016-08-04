@@ -25,7 +25,7 @@ class GroupDetailForm extends Component {
     render() {
         const {fields: {title, groupName}, handleSubmit, invalid} = this.props;
         return (
-            <div className="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-12" style=
+            <div className="col-lg-5 col-md-5 col-sm-12" style=
                 {{backgroundColor:'whitesmoke',
                 borderRadius: '8px',
                 boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)'}}>

@@ -5,7 +5,7 @@ import AddGroup from '../containers/addGroupContainer';
 export default class Home extends Component {
     render() {
         return (
-            <div className='row'>
+            <div>
                 <AddUser />
                 <AddGroup />
             </div>

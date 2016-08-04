@@ -21,6 +21,7 @@ class GroupList extends Component {
 
     render() {
         const {groups, totalCount} = this.props;
+        console.log(this.props);
         return (
             <div>
                 <div style=

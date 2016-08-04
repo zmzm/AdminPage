@@ -87,6 +87,12 @@ export function fetchGroupFailure(data) {
     }
 }
 
+export function resetActiveGroup() {
+    return {
+        type: ActionTypes.RESET_ACTIVE_GROUP
+    }
+}
+
 export function updateGroup(props) {
     const request = axios({
         method: 'PUT',

@@ -5,14 +5,17 @@ import {
     fetchGroupFailure,
     updateGroup,
     updateGroupSuccess,
-    updateGroupFailure
+    updateGroupFailure,
+    resetActiveGroup
 } from '../actions/groupActions';
 import {connect} from 'react-redux';
 import GroupDetail from '../components/groupDetail';
 
 const mapStateToProps = function (state) {
     return {
-        group: state.group.group
+        group: state.group.group,
+        users: state.group.users,
+        loading: state.group.loading
     }
 };
 
@@ -31,8 +34,12 @@ const mapDispatchToProps = function (dispatch) {
                     dispatch(updateGroupSuccess(response.payload.data)) :
                     dispatch(updateGroupFailure(response.payload.response.data))
             })
+        },
+        reset: function () {
+            dispatch(resetActiveGroup());
         }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupDetail);
+const GroupDetailContainer = connect(mapStateToProps, mapDispatchToProps)(GroupDetail);
+export default GroupDetailContainer;

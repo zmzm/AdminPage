@@ -4,8 +4,8 @@ import group from './groupReducer';
 import {reducer as formReducer} from 'redux-form';
 
 const rootReducer = combineReducers({
-    user,
-    group,
+    user: user,
+    group: group,
     form: formReducer
 });
 

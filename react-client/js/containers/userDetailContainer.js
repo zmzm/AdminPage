@@ -5,7 +5,11 @@ import {
     fetchUserFailure,
     updateUser,
     updateUserSuccess,
-    updateUserFailure
+    updateUserFailure,
+    addGroupToUser,
+    addGroupToUserSuccess,
+    addGroupToUserFailure,
+    resetActiveUser
 } from '../actions/userActions';
 import {connect} from 'react-redux';
 import UserDetail from '../components/userDetail';
@@ -31,6 +35,16 @@ const mapDispatchToProps = function (dispatch) {
                     dispatch(updateUserSuccess(response.payload.data)) :
                     dispatch(updateUserFailure(response.payload.response.data))
             })
+        },
+        addGroup: function (userId, group) {
+            dispatch(addGroupToUser(userId, {group: group})).then(function (response) {
+                response.payload.status == 200 ?
+                    dispatch(addGroupToUserSuccess(response.payload.data)) :
+                    dispatch(addGroupToUserFailure(response.payload.response.data))
+            })
+        },
+        resetMe: function () {
+            dispatch(resetActiveUser());
         }
     }
 };

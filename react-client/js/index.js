@@ -7,7 +7,7 @@ import App from './containers/app';
 import Home from './components/home';
 import UserList from './containers/userListContainer';
 import GroupList from './containers/groupListContainer';
-import GroupDetail from './containers/groupDetailContainer';
+import GroupDetail from './pages/groupDetailPage';
 import UserDetail from './containers/userDetailContainer';
 import NotFound from './components/notFound';
 
