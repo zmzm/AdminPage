@@ -6,22 +6,26 @@
     "url": "https://github.com/zmzm/AdminPage.git"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "serverTests": "grunt mochaTest"
+    "start": "NODE_ENV=development node server/app.js",
+    "test": "NODE_ENV=test grunt mochaTest"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "grunt": "latest",
-    "grunt-contrib-jshint": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-mocha": "1.0.0",
+    "grunt": "1.0.1",
+    "grunt-contrib-jshint": "1.0.0",
+    "grunt-contrib-watch": "1.0.0",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-uglify": "1.0.1",
     "grunt-mocha-test": "0.12.7",
-    "jasmine-core": "^2.4.1",
-    "karma": "0.13.22",
-    "karma-jasmine": "^0.3.8",
-    "karma-phantomjs-launcher": "1.0.0",
-    "phantomjs-prebuilt": "2.1.3",
+    "babel-loader": "6.2.4",
+    "babel-core": "6.10.4",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel": "6.5.2",
+    "babel-polyfill": "^6.3.14",
+    "grunt-browserify": "^3.8.0",
     "mocha": "2.4.5",
-    "supertest": "1.2.0"
+    "chai": "3.5.0",
+    "chai-http": "3.0.0"
   }
 }

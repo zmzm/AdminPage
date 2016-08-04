@@ -1,0 +1,31 @@
+<div ng-show="$ctrl.state.current.name === 'groups'">
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search group" ng-model="searchGroup">
+            </div>
+        </div>
+    </form>
+    <div md-whiteframe="20">
+        <table class="table table-bordered user-table">
+            <thead style="background-color: lightgrey">
+            <tr>
+                <th style="width: 50px">#</th>
+                <th style="width: 200px">Group name</th>
+                <th style="width: 200px">Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="group in $ctrl.groupList | filter: searchGroup"
+                ui-sref="groups.detail({groupName: group.groupName})">
+                <th scope="row">{{$index + 1}}</th>
+                <td>{{group.groupName}}</td>
+                <td>{{group.title}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination total-items="$ctrl.totalItems" items-per-page="$ctrl.itemsPerPage" ng-model="$ctrl.currentPage"
+                    ng-change="$ctrl.changePage()"></uib-pagination>
+</div>
